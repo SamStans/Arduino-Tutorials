@@ -1,0 +1,23 @@
+#include <AFMotor.h> //motor sheild library
+
+AF_DCMotor motor1 (1); //name motor; "(1)" is which motor slot it's in
+
+void setup() {
+  // put your setup code here, to run once:
+
+motor1.setSpeed(255);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+motor1.run(FORWARD); //moves motor one way
+delay(1000);
+motor1.run(RELEASE); //stop moving
+delay(1000);
+motor1.run(BACKWARD); //moves motor the other way
+delay(1000);
+}
+
+//https://www.youtube.com/watch?v=sNlAPugim-s
