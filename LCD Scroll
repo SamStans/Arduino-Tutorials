@@ -1,0 +1,70 @@
+/* Setting up the LCD to the arduino:
+ * Materials needed- LCD, potentiometer, bread board, arduino, wire, 220 ohm resistor
+ * The LCD has 16 pins on it, so this little tutorial will teach you what pins to use and where to connect them to
+ * (If your LCD doesn't have pre-soldered pins, you'll have to solder the wires on to there) 
+ * Step one- Place LCD horizontally on the horizontal bread board. Place potentiometer on the bread board, but out of the way of the LCD
+ * Step two- connect LCD to bread board
+ *    Pin 1- connect VSS to a ground rail on the bread board
+ *    Pin 2- connect VDD to the positive rail on the bread board
+ *    Pin 3- connect V0 to the middle pin of the potentiometer
+ *    Pin 4- connect RS to digital pin 12(or any digital pin- does not have to be a PWM pin)
+ *    Pin 5- connect RW to ground rail
+ *    Pin 6- connect E to digital pin 11 (must be any PWM digital pin)
+ *    Pin 16- connect K to ground rail
+ *    Pin 15- connect A to the positive rail using a 220 ohm resistor
+ *    Pin 14- connect D7 to digital pin 2 (or any digital pin- does not have to be a PWM pin)
+ *    Pin 13- connect D6 to digital pin 3 (must be any PWM digital pin)
+ *    Pin 12- connect D5 to digital pin 4 (or any digital pin- does not have to be a PWM pin)
+ *    Pin 11- connect D4 to digital pin 5 (must be any PWM digital pin)
+ * Step three- Connect one of the outside pins of the potentiometer to the ground rail and the other to the positive rail
+ * Step four- Connect the ground rail to "GND" on your arduino and the positive rail to "5v"
+ * 
+ * Adjusting the potentiometer will adjust the contrast of the symbols
+ * If you switch the resistor with a potentiometer, that'll allow you to adjust the contrast of the backlight
+ * 
+ * Look at this link for reference to the library: https://www.arduino.cc/en/Reference/LiquidCrystal
+ */
+
+#include <LiquidCrystal.h> /* Includes the LCD library which comes pre-loaded with the arduino software */
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); /* Creates a variable of type LiquidCrystal. You can use 4 or 8 data lines. The order of the pin numbers doesn't matter: https://www.arduino.cc/en/Reference/LiquidCrystalConstructor
+                                     * LiquidCrystal variableName(rs, enable, d4, d5, d6, d7); */
+
+
+void setup() {
+
+  lcd.begin(16,2); /* Initializes the interface to the LCD screen, and specifies the dimensions of the display. Must be the first thing in setup: https://www.arduino.cc/en/Reference/LiquidCrystalBegin
+                    * variableName.begin(width, height); */
+                    
+  lcd.print("Hello, world!"); /* Prints text to the LCD: https://www.arduino.cc/en/Reference/LiquidCrystalPrint
+                               * variableName.print(data); */
+  delay(500);
+
+     // scroll 13 positions (string length) to the left
+  // to move it offscreen left:
+  for (int left = 0; left < 13; left++) {
+    // scroll one position left:
+    lcd.scrollDisplayLeft();
+    // wait a bit:
+
+  // scroll 29 positions (string length + display length) to the right
+  // to move it offscreen right:
+  for (int right = 0; right < 29; right++) {
+    // scroll one position right:
+    lcd.scrollDisplayRight();
+    // wait a bit:
+    delay(150);
+    }
+  }
+}
+
+void loop() {
+
+  for (int left = 0; left < 13; left++) {
+    lcd.scrollDisplayLeft();
+    delay(500);
+    if (int left >= 13);
+      lcd.clear();
+    
+  }
+}
