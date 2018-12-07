@@ -1,0 +1,56 @@
+
+#include <AFMotor.h> //motor sheild library
+AF_DCMotor mot1 (1); //defines [back right] motor name; "(1)" is which motor slot it's in
+AF_DCMotor mot2 (2); //defines [front right] motor name
+AF_DCMotor mot3 (3); //defines [back left] motor name
+AF_DCMotor mot4 (4); //defines [front left] motor name
+
+
+
+void setup() {
+
+mot1.setSpeed(255); //give external power to motors 1-4
+mot2.setSpeed(255); // ^
+mot3.setSpeed(255); // ^
+mot4.setSpeed(255); // ^
+
+}
+
+
+
+
+void loop() {
+  
+// mot#.run(FORWARD);  |moves motor one way
+// mot#.run(BACKWARD); |moves motor the other way
+// mot#.run(RELEASE);  |stop moving
+// delay(#);           |how long previous action is carried out (in milliseconds) (1 second = 1000 milliseconds)
+
+// move forward
+mot1.run(FORWARD);
+mot2.run(FORWARD);
+mot3.run(FORWARD);
+mot4.run(FORWARD);
+delay(2000);
+
+// stop moving
+mot1.run(RELEASE);
+mot2.run(RELEASE);
+mot3.run(RELEASE);
+mot4.run(RELEASE);
+delay(2000);
+
+// turn right
+mot1.run(FORWARD);
+mot2.run(FORWARD);
+mot3.run(BACKWARD);
+mot4.run(BACKWARD);
+
+// stop moving
+mot1.run(RELEASE);
+mot2.run(RELEASE);
+mot3.run(RELEASE);
+mot4.run(RELEASE);
+delay(2000);
+
+}
