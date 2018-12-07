@@ -1,0 +1,56 @@
+/*Set Up: Use RGB LED; look at it with longest lead 2nd to left
+          1st (left) is Red, 2nd is GND, 3rd is Green, 4th (right) is Blue
+          red is in pin 9, green in pin 10, and blue in pin 11
+  Set Up: must use a pin for each color and must be a pmw (squigly line) to be able to change to the inbetween colors
+*/
+
+int red = 9; //sets pin 9 to red led
+int green = 10; //sets pin 10 to green led
+int blue = 11; //sets pin 11 to blue led
+int brightness = 75; // changes brightness by controlling to volatage; 255 is the max (5v)
+
+void setup() {
+Serial.begin(9600); //turns on serial communication
+                    //serial communication is used for communication between the arduino board and another device (in this case, the sensor) https://www.arduino.cc/reference/en/language/functions/communication/serial/
+pinMode(red,OUTPUT); //sets red pin(9) to an output
+pinMode(green,OUTPUT); //sets green pin(10) to an output
+pinMode(blue,OUTPUT); //sets blue pin(11) to an output
+
+}
+
+void loop() {
+//analogWrite (used with PWM) allows you to change the voltage going into the pin instead of just turning it on and off
+//to make colors inbetween, change the amounts of red, green, and blue. Look them up online to get the right colors
+  //https://www.rapidtables.com/web/color/RGB_Color.html
+
+  //makes RGB red
+  analogWrite(red,brightness); //gives "brightness" (as defined in the variables above) to the red pin
+  analogWrite(green,0); //gives no voltage to green pin (off)
+  analogWrite(blue,0); //gives no voltage to blue pin (off) 
+  delay(1000); //does the above function (turns on only red) for 1000 miliseconds
+
+  //makes RGB orange
+  analogWrite(red,155); //gives 155 volts to red pin
+  analogWrite(green,53); //gives 53volts to green pin
+  analogWrite(blue,0); //gives no voltage to blue pin (off) 
+  delay(1000); //does the above function (turns to orange) for 1000 miliseconds
+
+  //makes RGB green
+  analogWrite(red,0); //gives no voltage to red pin (off) 
+  analogWrite(green,brightness); //gives "brightness" (as defined in the variables above) to the green pin
+  analogWrite(blue,0); //gives no voltage to blue pin (off) 
+  delay(1000); //does the above function (turns on only green) for 1000 miliseconds
+
+  //makes RGB blue
+  analogWrite(red,0); //gives no voltage to red pin (off)
+  analogWrite(green,0); //gives no voltage to green pin (off)
+  analogWrite(blue,brightness); //gives "brightness" (as defined in the variables above) to the blue pin
+  delay(1000); //does the above functions (turns on only blue) for 1000 miliseconds
+
+  //makes RGB Reset Purple
+  analogWrite(red,141); //gives 141 volts to red pin
+  analogWrite(green,72); //gives 72 volts to green pin
+  analogWrite(blue,171); //gives 171 volts to blue pin
+  delay(1000); //does the above functions (turns to Reset purple) for 1000 miliseconds
+ 
+}
