@@ -1,0 +1,30 @@
+const int trigPin = 9; //defines trig to what pin
+const int echoPin = 10; //deinfes echo to what pin
+
+long duration; //defines variable for the travel time it takes to get from the sensor to the interger
+               //"long" is a data type that means it can store 32 bits, and "duration" is the name of the variable
+int distance; //integer variable for the distance 
+
+void setup() {
+  pinMode(trigPin,OUTPUT); //trigPin defined as output
+  pinMode(echoPin,INPUT); //echoPin defined as input
+  Serial.begin(9600); //start serial communication for showing results on the Serial Monitor in the loop
+                      //serial communication is used for communication between the arduino board and another device (in this case, the sensor) https://www.arduino.cc/reference/en/language/functions/communication/serial/
+}
+
+void loop() {
+  digitalWrite(trigPin,LOW); //makes sure the pin is clear
+  delayMicroseconds(2); //keeps sensor from emitting any waves for (x) microseconds
+
+  digitalWrite(trigPin,HIGH); //creates ultrasonic sound wave
+  delayMicroseconds(10); //sends out ultrasonic sound wave for (x) microseconds
+  digitalWrite(trigPin,LOW); //stops sensor from emitting ultrasonic waves
+
+  duration = pulseIn(echoPin,HIGH); // "pulseIn()" with "duration" reads the travel time;  pulseIn waits for echoPin to go HIGH, caused by the bounced sound wave till when the pin goes LOW and records that time in microsecondsd
+  distance = duration*0.034/2; //to get the distance, the duration is multiplied times 0.034 (the speed of the wave) and divded by two
+
+  Serial.print("Distance:"); //prints the value of the distance on the Serial Monitor gathered from the sensor
+  Serial.println(distance); //says "distance" in serial monitor
+}
+
+// https://www.youtube.com/watch?v=ZejQOX69K5M
